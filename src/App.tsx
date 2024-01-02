@@ -1,11 +1,9 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import './App.css';
 import {Route, Routes} from "react-router-dom";
 import {navItemsArray, navProductsItemsArray} from "./utils/constants";
-import Layout from "./components/navigation/Layout";
 import Home from "./components/pages/Home";
 import Customers from "./components/pages/Customers";
-import Products from "./components/navigation/Products";
 import Dairy from "./components/pages/Dairy";
 import Bread from "./components/pages/Bread";
 import Orders from "./components/pages/Orders";
@@ -15,19 +13,29 @@ import Logout from "./components/pages/Logout";
 import SignUp from "./components/pages/SignUp";
 import ErrorPage from "./components/pages/ErrorPage";
 import NavigatorDesktop from "./components/navigation/NavigatorDesktop";
+import {useAppDispatch, useAppSelector} from "./app/hooks";
+import {NavItem} from "./utils/types";
+import {getRoutes} from "./utils/utilsFunctions";
+import {setRoutes} from "./features/routesSlice";
 
 function App()
 {
+    const authUser = useAppSelector(state => state.auth.authUser);
+    const routes = useAppSelector(state => state.routes.routes);
+    const dispatch = useAppDispatch();
+
+    useEffect(() => {dispatch(setRoutes(getRoutes(authUser)))}, [authUser]);
+
     return (
         <Routes>
-            <Route path={navItemsArray[0].route} element={<NavigatorDesktop routes={navItemsArray}/>}>
+            <Route path={navItemsArray[0].route} element={<NavigatorDesktop routes={routes}/>}>
                 <Route index element={<Home/>}/>
                 <Route path={navItemsArray[1].route} element={<Customers/>}/>
                 <Route path={navItemsArray[2].route} element={<NavigatorDesktop routes={navProductsItemsArray}
                             subnav/>}>
                     <Route path={navProductsItemsArray[0].route} element={<Dairy/>}/>
                     <Route path={navProductsItemsArray[1].route} element={<Bread/>}/>
-                    <Route path={navProductsItemsArray[2].route} element={<NavigatorDesktop routes={navItemsArray}/>}/>
+                    <Route path={navProductsItemsArray[2].route} element={<NavigatorDesktop routes={routes}/>}/>
                 </Route>
                 <Route path={navItemsArray[3].route} element={<Orders/>}/>
                 <Route path={navItemsArray[4].route} element={<ShoppingCart/>}/>

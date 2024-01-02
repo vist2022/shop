@@ -11,6 +11,7 @@ export const navItemsArray: NavItem[] =
         {route: 'logout', title: 'Logout', authenticated: true},
         {route: 'signup', title: 'Sign up', noAuthenticated: true}
     ];
+export const navItemsRoutesArray = navItemsArray.map(item=> (item.route))
 
 export const subNavProductStart = navItemsArray.findIndex(item=>item.route ==='products');
 export const navProductsItemsArray: NavItem[] =
@@ -20,3 +21,6 @@ export const navProductsItemsArray: NavItem[] =
         {route: 'back', title: 'Back'}
     ];
 export const navProductsFirstActive = navProductsItemsArray[0].route;
+
+
+export const AUTH_USER = 'auth-user';
