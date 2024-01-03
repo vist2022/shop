@@ -5,16 +5,18 @@ import {store} from './app/store';
 import App from './App';
 import './index.css';
 import {BrowserRouter} from "react-router-dom";
+import {setProducts} from "./firebase/dbService";
 
 const container = document.getElementById('root')!;
 const root = createRoot(container);
 
-root.render(
-    <React.StrictMode>
-        <BrowserRouter>
-            <Provider store={store}>
-                <App/>
-            </Provider>
-        </BrowserRouter>
-    </React.StrictMode>
-);
+setProducts()
+    .then(()=>root.render(
+        <React.StrictMode>
+            <BrowserRouter>
+                <Provider store={store}>
+                    <App/>
+                </Provider>
+            </BrowserRouter>
+        </React.StrictMode>
+    ));

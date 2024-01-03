@@ -13,3 +13,24 @@ export interface LoginData
     email: string
     password: string
 }
+
+export interface ProductType
+{
+    id?:string
+    title:string
+    category:string
+    unit:string
+    cost:number
+    image:string
+}
+
+export interface CategoryType
+{
+    name:string
+}
+export interface ProductTypeFromConfig
+{
+    "name":string
+    "cost":number
+    "unit":string
+}

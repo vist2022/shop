@@ -22,5 +22,8 @@ export const navProductsItemsArray: NavItem[] =
     ];
 export const navProductsFirstActive = navProductsItemsArray[0].route;
 
+export const PRODUCTS_COLLECTION='products';
+export const CATEGORIES_COLLECTION = 'categories';
+
 
 export const AUTH_USER = 'auth-user';

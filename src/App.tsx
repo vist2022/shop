@@ -14,7 +14,6 @@ import SignUp from "./components/pages/SignUp";
 import ErrorPage from "./components/pages/ErrorPage";
 import NavigatorDesktop from "./components/navigation/NavigatorDesktop";
 import {useAppDispatch, useAppSelector} from "./app/hooks";
-import {NavItem} from "./utils/types";
 import {getRoutes} from "./utils/utilsFunctions";
 import {setRoutes} from "./features/routesSlice";
 
