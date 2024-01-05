@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import './App.css';
 import {Route, Routes} from "react-router-dom";
 import {navItemsArray, navProductsItemsArray} from "./utils/constants";
@@ -16,6 +16,9 @@ import NavigatorDesktop from "./components/navigation/NavigatorDesktop";
 import {useAppDispatch, useAppSelector} from "./app/hooks";
 import {getRoutes} from "./utils/utilsFunctions";
 import {setRoutes} from "./features/routesSlice";
+import {getProducts} from "./firebase/dbService";
+import {ProductType} from "./utils/types";
+import {setProducts} from "./features/productSlice";
 
 function App()
 {
@@ -24,6 +27,19 @@ function App()
     const dispatch = useAppDispatch();
 
     useEffect(() => {dispatch(setRoutes(getRoutes(authUser)))}, [authUser]);
+
+    useEffect(() => {
+        const sub=getProducts().subscribe(
+            {
+                next:(products:ProductType[])=>
+                {
+                    console.log(products);
+                    dispatch(setProducts(products))
+                }
+            }
+        );
+        return ()=>sub.unsubscribe()
+    }, []);
 
     return (
         <Routes>

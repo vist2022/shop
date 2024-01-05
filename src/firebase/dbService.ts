@@ -4,10 +4,20 @@ import {CATEGORIES_COLLECTION, PRODUCTS_COLLECTION} from "../utils/constants";
 import {db} from "./firebase-config";
 import {CategoryType, ProductType} from "../utils/types";
 import {getRandomNumber} from "../utils/utilsFunctions";
+import {Observable} from "rxjs";
+import {collectionData} from "rxfire/firestore";
 
 
 const productCollection = collection(db, PRODUCTS_COLLECTION);
 const categoriesCollection = collection(db, CATEGORIES_COLLECTION);
+
+export function getProducts():Observable<ProductType[]>
+{
+    return collectionData(productCollection) as Observable<ProductType[]>
+}
+
+
+
 
 export async function addProduct(product: ProductType) {
     product.id = getRandomNumber(100_000, 999_999).toString();
@@ -58,6 +68,7 @@ export async function setProducts() {
     }
     return collectionCount
 }
+
 
 
 

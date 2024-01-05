@@ -22,3 +22,4 @@ export function getAllCategoriesFromConfig(arr:ProductTypeFromConfig[]):string[]
 {
     return Array.from(new Set(arr.map(item=>item.name.split('-')[0])))
 }
+

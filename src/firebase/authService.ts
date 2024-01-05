@@ -33,3 +33,4 @@ export async function loginFirebase(loginData: LoginData) {
 export async function logoutFireBase() {
     await signOut(auth);
 }
+

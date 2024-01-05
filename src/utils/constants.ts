@@ -27,3 +27,4 @@ export const CATEGORIES_COLLECTION = 'categories';
 
 
 export const AUTH_USER = 'auth-user';
+export const ILS = '\u20AA'; // Unicode-код для символа шекеля
