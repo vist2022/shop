@@ -19,6 +19,9 @@ import {setRoutes} from "./features/routesSlice";
 import {getProducts} from "./firebase/dbService";
 import {ProductType} from "./utils/types";
 import {setProducts} from "./features/productSlice";
+import {getShoppingCard} from "./firebase/ordersService";
+import {resetShoppingCart, setShoppingCart} from "./features/shopingCardSlice";
+import {Subscription} from "rxjs";
 
 function App()
 {
@@ -33,13 +36,34 @@ function App()
             {
                 next:(products:ProductType[])=>
                 {
-                    console.log(products);
                     dispatch(setProducts(products))
                 }
             }
         );
         return ()=>sub.unsubscribe()
     }, []);
+
+    useEffect(() => {
+        let subscription:Subscription;
+        if (authUser != '' && !authUser.includes('admin'))
+        {
+            subscription = getShoppingCard(authUser).subscribe(
+                {
+                    next: shoppingCart => dispatch(setShoppingCart(shoppingCart))
+                }
+            )
+        }
+        else
+        {
+            dispatch(resetShoppingCart())
+        }
+        return ()=>
+        {
+            if (subscription)
+                subscription.unsubscribe()
+        }
+    }, [authUser]);
+
 
     return (
         <Routes>

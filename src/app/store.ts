@@ -4,9 +4,10 @@ import navValue from '../features/navValueSlice';
 import code from '../features/codeSlice';
 import routes from '../features/routesSlice';
 import products from "../features/productSlice";
+import card from "../features/shopingCardSlice";
 
 export const store = configureStore({
-    reducer: {auth, navValue, code, routes, products},
+    reducer: {auth, navValue, code, routes, products, card},
 });
 
 export type AppDispatch = typeof store.dispatch;

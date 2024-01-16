@@ -23,7 +23,13 @@ let apiRef = useGridApiRef();
 
 
     return <Box sx={{width: '80vw', height:'80vh', margin:'0 auto'}}>
-        <DataGrid columns={columns} rows={products}/>
+        <DataGrid columns={columns} rows={products}
+                  // onCellEditStop={(params, event) =>
+        // {if (params.reason === GridCellEditStopReasons.cellFocusOut) {
+        //     event.defaultMuiPrevented = true;
+        //     alert(JSON.stringify(params))
+        // }}}
+        />
     </Box>
 };
 
